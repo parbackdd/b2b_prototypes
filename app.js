@@ -157,7 +157,7 @@ approveButton.addEventListener("click", () => {
   checks.forEach((check) => {
     check.disabled = true;
   });
-  showToast("Report approved. External publication would still follow established Telia controls.");
+  showToast("Report approved. External publication would still follow established company controls.");
 });
 
 resetButton.addEventListener("click", () => {
