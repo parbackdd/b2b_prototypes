@@ -1,0 +1,313 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Concept prototype for AI-assisted incident report drafting.">
+  <title>Incident Report Drafting — Concept Prototype</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">T</span>
+      <span>Telia B2B</span>
+      <span class="prototype-label">Concept prototype</span>
+    </div>
+    <div class="user">
+      <span class="avatar">AM</span>
+      <span>Alex Morgan · Incident Manager</span>
+    </div>
+  </header>
+
+  <div class="demo-notice">
+    <strong>Synthetic demonstration data.</strong>
+    This prototype is not connected to TeliaNow and does not process customer information.
+  </div>
+
+  <main>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">AI-assisted content & documentation</p>
+        <h1>Incident Report Drafting</h1>
+        <p class="intro">
+          Turn an approved incident case into a traceable first draft. AI prepares the material;
+          the incident manager reviews, edits and remains accountable.
+        </p>
+      </div>
+      <div class="status-card">
+        <span class="status-dot"></span>
+        <div>
+          <strong id="workflow-status">Ready to generate</strong>
+          <span id="workflow-detail">No report has been generated</span>
+        </div>
+      </div>
+    </section>
+
+    <nav class="steps" aria-label="Workflow">
+      <button class="step is-active" data-target="source-panel">
+        <span>1</span>
+        <div><strong>Source case</strong><small>Review approved data</small></div>
+      </button>
+      <button class="step" data-target="draft-panel">
+        <span>2</span>
+        <div><strong>AI draft</strong><small>Generate with traceability</small></div>
+      </button>
+      <button class="step" data-target="review-panel">
+        <span>3</span>
+        <div><strong>Human review</strong><small>Edit, decide and approve</small></div>
+      </button>
+    </nav>
+
+    <section class="workspace">
+      <aside class="case-sidebar">
+        <div class="sidebar-heading">
+          <div>
+            <p class="eyebrow">Selected case</p>
+            <h2>INC-2026-01482</h2>
+          </div>
+          <span class="severity">P1</span>
+        </div>
+
+        <dl class="case-facts">
+          <div><dt>Customer</dt><dd>Nordic Retail Group</dd></div>
+          <div><dt>Service</dt><dd>Managed WAN</dd></div>
+          <div><dt>Started</dt><dd>14 Oct · 08:17</dd></div>
+          <div><dt>Restored</dt><dd>14 Oct · 10:46</dd></div>
+          <div><dt>Duration</dt><dd>2 h 29 min</dd></div>
+          <div><dt>Owner</dt><dd>CO Excellence</dd></div>
+        </dl>
+
+        <div class="source-summary">
+          <strong>Source readiness</strong>
+          <div class="readiness-row"><span>Case timeline</span><span class="good">Complete</span></div>
+          <div class="readiness-row"><span>Technical cause</span><span class="good">Confirmed</span></div>
+          <div class="readiness-row"><span>Customer impact</span><span class="warning">Review</span></div>
+          <div class="readiness-row"><span>Preventive action</span><span class="warning">Pending</span></div>
+        </div>
+
+        <button id="generate-button" class="primary-button">
+          <span class="button-icon" aria-hidden="true">✦</span>
+          Generate report draft
+        </button>
+        <button id="reset-button" class="text-button">Reset demonstration</button>
+      </aside>
+
+      <div class="content-area">
+        <section id="source-panel" class="panel is-visible">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Approved source information</p>
+              <h2>Case timeline</h2>
+            </div>
+            <span class="source-badge">TeliaNow · simulated</span>
+          </div>
+
+          <div class="timeline">
+            <article class="timeline-event" id="event-1">
+              <time>08:17</time>
+              <div>
+                <strong>Incident detected</strong>
+                <p>Monitoring detected loss of connectivity at 43 customer sites in Sweden and Norway.</p>
+                <span class="event-meta">Monitoring · EVT-01</span>
+              </div>
+            </article>
+            <article class="timeline-event" id="event-2">
+              <time>08:24</time>
+              <div>
+                <strong>Major incident declared</strong>
+                <p>CO Excellence established the incident bridge and notified the customer service manager.</p>
+                <span class="event-meta">Incident management · EVT-02</span>
+              </div>
+            </article>
+            <article class="timeline-event" id="event-3">
+              <time>08:41</time>
+              <div>
+                <strong>Fault domain isolated</strong>
+                <p>Traffic loss was isolated to a software issue in one provider-edge router after a planned configuration update.</p>
+                <span class="event-meta">Network operations · EVT-03</span>
+              </div>
+            </article>
+            <article class="timeline-event" id="event-4">
+              <time>09:12</time>
+              <div>
+                <strong>Recovery action initiated</strong>
+                <p>The team rolled back the configuration and began controlled service restoration.</p>
+                <span class="event-meta">Network operations · EVT-04</span>
+              </div>
+            </article>
+            <article class="timeline-event" id="event-5">
+              <time>10:46</time>
+              <div>
+                <strong>Service restored</strong>
+                <p>Connectivity was confirmed at all affected sites. Enhanced monitoring remained active.</p>
+                <span class="event-meta">Incident management · EVT-05</span>
+              </div>
+            </article>
+            <article class="timeline-event is-open" id="event-6">
+              <time>Open</time>
+              <div>
+                <strong>Preventive action not confirmed</strong>
+                <p>The permanent software correction and deployment date are still being assessed by Technology.</p>
+                <span class="event-meta">Problem management · GAP-01</span>
+              </div>
+            </article>
+          </div>
+        </section>
+
+        <section id="draft-panel" class="panel">
+          <div class="empty-state" id="draft-empty">
+            <div class="empty-icon">✦</div>
+            <h2>No report draft yet</h2>
+            <p>Generate a draft from the approved case data. No information will be sent or published.</p>
+          </div>
+
+          <div id="generation-state" class="generation-state" hidden>
+            <div class="spinner"></div>
+            <h2>Preparing the report</h2>
+            <p id="generation-message">Reading approved case events…</p>
+            <div class="progress"><span id="progress-bar"></span></div>
+          </div>
+
+          <div id="draft-content" hidden>
+            <div class="panel-header">
+              <div>
+                <p class="eyebrow">AI-generated first draft</p>
+                <h2>Customer Incident Report</h2>
+              </div>
+              <div class="header-actions">
+                <span class="draft-badge">Draft · not approved</span>
+                <button id="edit-button" class="secondary-button">Edit draft</button>
+              </div>
+            </div>
+
+            <div class="quality-strip">
+              <div><span class="quality-value">5/5</span><span>Timeline events used</span></div>
+              <div><span class="quality-value">1</span><span>Open information gap</span></div>
+              <div><span class="quality-value">100%</span><span>Statements traceable</span></div>
+            </div>
+
+            <article id="report-document" class="report-document">
+              <div class="report-title">
+                <span>Incident report</span>
+                <strong>Managed WAN service disruption</strong>
+                <small>Nordic Retail Group · INC-2026-01482</small>
+              </div>
+
+              <section>
+                <h3>Executive summary</h3>
+                <p contenteditable="false">
+                  On 14 October 2026, Nordic Retail Group experienced a disruption to its Managed WAN
+                  service affecting 43 sites in Sweden and Norway. The incident started at 08:17 and
+                  service was fully restored at 10:46. The disruption was linked to a software issue
+                  in a provider-edge router following a planned configuration update.
+                  <button class="citation" data-source="event-1 event-3 event-5">3 sources</button>
+                </p>
+              </section>
+
+              <section>
+                <h3>Customer impact</h3>
+                <p contenteditable="false">
+                  Connectivity was unavailable or unstable at the affected sites during the incident.
+                  The case confirms the number and location of affected sites but does not document
+                  the impact on the customer's business processes.
+                  <button class="citation" data-source="event-1">EVT-01</button>
+                </p>
+                <div class="review-note">
+                  <strong>Reviewer input required</strong>
+                  Confirm whether customer business impact should be added before external use.
+                </div>
+              </section>
+
+              <section>
+                <h3>Timeline and resolution</h3>
+                <ul>
+                  <li contenteditable="false"><strong>08:17:</strong> Monitoring detected connectivity loss at 43 sites.</li>
+                  <li contenteditable="false"><strong>08:24:</strong> A major incident was declared and the customer service manager was notified.</li>
+                  <li contenteditable="false"><strong>08:41:</strong> The fault was isolated to a software issue after a planned configuration update.</li>
+                  <li contenteditable="false"><strong>09:12:</strong> The configuration was rolled back and controlled restoration began.</li>
+                  <li contenteditable="false"><strong>10:46:</strong> Connectivity was confirmed at all affected sites.</li>
+                </ul>
+                <button class="citation" data-source="event-1 event-2 event-3 event-4 event-5">5 sources</button>
+              </section>
+
+              <section>
+                <h3>Root cause</h3>
+                <p contenteditable="false">
+                  The confirmed technical cause was a software issue in a provider-edge router
+                  following a planned configuration update. Service was restored by rolling back
+                  the configuration.
+                  <button class="citation" data-source="event-3 event-4">2 sources</button>
+                </p>
+              </section>
+
+              <section>
+                <h3>Preventive actions</h3>
+                <p contenteditable="false">
+                  A permanent correction and deployment date have not yet been confirmed.
+                </p>
+                <div class="missing-data">
+                  <strong>Information missing from source case</strong>
+                  The report should not claim that preventive actions are complete until Technology
+                  has confirmed the permanent correction and implementation date.
+                  <button class="citation" data-source="event-6">GAP-01</button>
+                </div>
+              </section>
+            </article>
+          </div>
+        </section>
+
+        <section id="review-panel" class="panel">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Human accountability</p>
+              <h2>Review and decision</h2>
+            </div>
+            <span id="review-state" class="draft-badge">Waiting for draft</span>
+          </div>
+
+          <div id="review-locked" class="empty-state compact">
+            <div class="empty-icon">✓</div>
+            <h2>Generate the draft first</h2>
+            <p>The approval controls become available after the report has been generated.</p>
+          </div>
+
+          <div id="review-content" hidden>
+            <div class="review-grid">
+              <div class="checklist">
+                <h3>Required checks</h3>
+                <label><input type="checkbox" class="approval-check"> Timeline matches the source case</label>
+                <label><input type="checkbox" class="approval-check"> Root cause wording is technically accurate</label>
+                <label><input type="checkbox" class="approval-check"> Customer impact is appropriately described</label>
+                <label><input type="checkbox" class="approval-check"> Sensitive information has been removed</label>
+                <label><input type="checkbox" class="approval-check"> Required legal, press and security review is complete</label>
+              </div>
+
+              <div class="decision-card">
+                <h3>Review decision</h3>
+                <label for="review-comment">Reviewer comment</label>
+                <textarea id="review-comment" rows="5" placeholder="Document corrections, missing information or approval rationale…"></textarea>
+                <div class="decision-actions">
+                  <button id="changes-button" class="secondary-button">Request changes</button>
+                  <button id="approve-button" class="primary-button" disabled>Approve report</button>
+                </div>
+                <p class="approval-help">All required checks must be completed before approval.</p>
+              </div>
+            </div>
+
+            <div class="governance-note">
+              <strong>Prototype control principle</strong>
+              AI creates a traceable draft. The named incident manager remains responsible for
+              accuracy, disclosure decisions and completion of the established review process.
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
