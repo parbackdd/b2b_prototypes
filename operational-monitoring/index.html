@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Synthetic concept prototype for operational monitoring and control.">
+  <title>Operational Attention Desk — Concept Prototype</title>
+  <link rel="stylesheet" href="../shared.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">B</span>
+      <span>B2B Operations</span>
+      <span class="prototype-label">Concept prototype</span>
+    </div>
+    <div class="top-actions">
+      <a class="nav-link" href="../prototypes/">All prototypes</a>
+      <span class="avatar">MO</span>
+      <span class="user-label">Morgan Olsen · Operations Lead</span>
+    </div>
+  </header>
+
+  <div class="notice"><strong>Synthetic demonstration data.</strong> The assistant groups and explains signals; people acknowledge, assign, dismiss or initiate existing escalation processes.</div>
+
+  <main class="page">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Operational monitoring & control</p>
+        <h1>Operational Attention Desk</h1>
+        <p class="intro">Turn fragmented queue, case, delivery and automation signals into a prioritised set of explainable attention items.</p>
+      </div>
+      <div class="status-card">
+        <span class="status-dot"></span>
+        <div><strong id="workflow-status">Signals available</strong><span id="workflow-detail">42 events from four synthetic sources</span></div>
+      </div>
+    </section>
+
+    <nav class="steps" style="--step-count:4" aria-label="Operational attention workflow">
+      <button class="step is-active" data-panel="signals"><span>1</span><div><strong>Signals</strong><small>Review source landscape</small></div></button>
+      <button class="step" data-panel="attention"><span>2</span><div><strong>Attention items</strong><small>Understand grouped patterns</small></div></button>
+      <button class="step" data-panel="response"><span>3</span><div><strong>Human response</strong><small>Choose owner and action</small></div></button>
+      <button class="step" data-panel="audit"><span>4</span><div><strong>Audit trail</strong><small>Follow operational decisions</small></div></button>
+    </nav>
+
+    <section class="workspace">
+      <aside class="sidebar">
+        <div class="sidebar-header"><div><p class="eyebrow">Monitoring window</p><h2>Today · 08:00–11:00</h2></div><span class="badge green">Live concept</span></div>
+        <dl class="facts">
+          <div><dt>Queue signals</dt><dd>18</dd></div>
+          <div><dt>Case signals</dt><dd>9</dd></div>
+          <div><dt>Delivery signals</dt><dd>8</dd></div>
+          <div><dt>Automation signals</dt><dd>7</dd></div>
+          <div><dt>Auto-escalations</dt><dd>0</dd></div>
+        </dl>
+        <div class="summary-box">
+          <strong>Control boundary</strong>
+          <div class="summary-row"><span>Group signals</span><span class="good">Allowed</span></div>
+          <div class="summary-row"><span>Recommend owner</span><span class="good">Allowed</span></div>
+          <div class="summary-row"><span>Change operations</span><span class="warning">Blocked</span></div>
+          <div class="summary-row"><span>Escalate automatically</span><span class="warning">Blocked</span></div>
+        </div>
+        <button id="group" class="primary full">✦ Create attention view</button>
+        <button id="reset" class="ghost">Reset demonstration</button>
+      </aside>
+
+      <div>
+        <section id="signals" class="panel is-visible">
+          <div class="panel-header"><div><p class="eyebrow">Cross-operational signals</p><h2>Raw events are visible but fragmented</h2></div><span class="badge blue">42 signals</span></div>
+          <div class="metric-grid">
+            <div class="metric"><strong>18</strong><span>Queue events</span></div>
+            <div class="metric"><strong>9</strong><span>Case events</span></div>
+            <div class="metric"><strong>8</strong><span>Delivery events</span></div>
+            <div class="metric"><strong>7</strong><span>Automation events</span></div>
+          </div>
+          <div class="two-column">
+            <div>
+              <h3>Recent source events</h3>
+              <ul class="list">
+                <li class="list-item"><time>10:46</time><div><strong>Order validation queue above normal range</strong><p>12 items waiting longer than 45 minutes.</p></div><span class="tag amber">Queue</span></li>
+                <li class="list-item"><time>10:39</time><div><strong>Three automation retries failed</strong><p>Same workflow and validation step.</p></div><span class="tag red">Automation</span></li>
+                <li class="list-item"><time>10:31</time><div><strong>Five deliveries at SLA risk</strong><p>All depend on successful order validation.</p></div><span class="tag purple">Delivery</span></li>
+                <li class="list-item"><time>10:18</time><div><strong>Similar customer cases opened</strong><p>Orders appear accepted but do not progress.</p></div><span class="tag blue">Cases</span></li>
+              </ul>
+            </div>
+            <div class="detail-pane">
+              <h3>Why a grouped view matters</h3>
+              <p>Each source shows a legitimate local event. The operational concern becomes clearer when related signals are connected across the workflow.</p>
+              <div class="callout amber"><strong>Current manual burden</strong>An operations lead would otherwise scan several queues and tools, infer whether events belong together and decide who should investigate.</div>
+              <div class="callout blue"><strong>Assistant role</strong>Group, explain and prioritise. Existing teams retain ownership of acknowledgement, assignment, investigation and escalation.</div>
+            </div>
+          </div>
+        </section>
+
+        <section id="attention" class="panel">
+          <div id="attention-empty" class="empty"><div class="empty-icon">◎</div><h2>No grouped attention view yet</h2><p>Analyse the source events to identify related operational patterns.</p></div>
+          <div id="attention-loading" class="loading" hidden><div class="spinner"></div><h2>Connecting related signals</h2><p id="loading-message">Reading queues, cases, deliveries and automation events…</p><div class="progress"><span id="progress"></span></div></div>
+          <div id="attention-content" hidden>
+            <div class="panel-header"><div><p class="eyebrow">Prioritised operational view</p><h2>4 attention items from 42 signals</h2></div><span class="badge amber">Human acknowledgement required</span></div>
+            <div class="attention-layout">
+              <div class="exception-list">
+                <button class="exception-row is-selected" data-id="validation"><span class="severity high">High</span><div><strong>Order validation flow is stalled</strong><small>21 related signals · 5 deliveries at risk</small></div><span>›</span></button>
+                <button class="exception-row" data-id="sla"><span class="severity medium">Medium</span><div><strong>Service case cluster nearing SLA</strong><small>8 related signals · one customer segment</small></div><span>›</span></button>
+                <button class="exception-row" data-id="robot"><span class="severity medium">Medium</span><div><strong>Billing robot success rate falling</strong><small>7 related signals · repeated retries</small></div><span>›</span></button>
+                <button class="exception-row" data-id="backlog"><span class="severity low">Low</span><div><strong>Provisioning backlog above baseline</strong><small>6 related signals · no immediate SLA breach</small></div><span>›</span></button>
+              </div>
+              <article id="attention-detail" class="detail-pane"></article>
+            </div>
+          </div>
+        </section>
+
+        <section id="response" class="panel">
+          <div class="panel-header"><div><p class="eyebrow">Human operational control</p><h2>Respond to selected attention item</h2></div><span id="response-state" class="badge amber">Awaiting response</span></div>
+          <div class="two-column">
+            <div>
+              <span class="tag red">High urgency</span><h3 style="margin-top:10px">Order validation flow is stalled</h3>
+              <p>Twenty-one related signals indicate that validation failures are creating a queue and delivery risk.</p>
+              <div class="evidence-box">
+                <strong>Supporting signals</strong>
+                <div class="source-row"><span>Queue</span><code>12 items &gt;45 min</code></div>
+                <div class="source-row"><span>Automation</span><code>3 failed retries</code></div>
+                <div class="source-row"><span>Delivery</span><code>5 orders at SLA risk</code></div>
+                <div class="source-row"><span>Cases</span><code>3 matching symptoms</code></div>
+              </div>
+              <div class="callout amber"><strong>Recommended next check</strong>Confirm whether the failed validation step is the common dependency before initiating the existing incident or escalation process.</div>
+            </div>
+            <div class="detail-pane">
+              <h3>Choose response</h3>
+              <label class="radio-card"><input type="radio" name="response" value="Acknowledge"><span><strong>Acknowledge</strong><p>Record that an operations lead has reviewed the item.</p></span></label>
+              <label class="radio-card"><input type="radio" name="response" value="Assign"><span><strong>Assign for investigation</strong><p>Route the item to an accountable team.</p></span></label>
+              <label class="radio-card"><input type="radio" name="response" value="Initiate escalation"><span><strong>Initiate existing escalation process</strong><p>Human decision starts the approved operational process.</p></span></label>
+              <label class="radio-card"><input type="radio" name="response" value="Dismiss"><span><strong>Dismiss with reason</strong><p>Close this attention item as non-actionable.</p></span></label>
+              <label class="form-label" for="owner">Accountable owner</label>
+              <select id="owner"><option value="">Choose owner</option><option>Order Operations</option><option>Automation Support</option><option>Delivery Management</option><option>Service Desk Lead</option></select>
+              <label class="form-label" for="note">Response note</label>
+              <textarea id="note" rows="4" placeholder="Explain the decision, immediate check and expected follow-up…"></textarea>
+              <div class="action-row"><button id="record-response" class="primary" disabled>Record response</button></div>
+            </div>
+          </div>
+        </section>
+
+        <section id="audit" class="panel">
+          <div class="panel-header"><div><p class="eyebrow">Operational accountability</p><h2>Attention and response audit trail</h2></div><span class="badge green">No autonomous actions</span></div>
+          <div class="audit">
+            <strong>Current item history</strong>
+            <div class="audit-entry"><time>10:47</time><span>Assistant grouped 21 source signals into “Order validation flow is stalled” and recommended review.</span></div>
+            <div class="audit-entry"><time>10:48</time><span>Urgency calculated from queue age, failed retries and five delivery SLA risks. No escalation executed.</span></div>
+            <div id="human-audit" class="audit-entry" hidden><time>Now</time><span id="audit-text"></span></div>
+          </div>
+          <div class="card-grid">
+            <article class="card"><span class="tag green">Transparent</span><h3>Source signals remain linked</h3><p>Reviewers can inspect why signals were grouped and what contributed to urgency.</p></article>
+            <article class="card"><span class="tag purple">Controlled</span><h3>People initiate operational action</h3><p>Acknowledgement, ownership and escalation remain explicit human decisions.</p></article>
+            <article class="card"><span class="tag blue">Auditable</span><h3>Recommendations and decisions are distinct</h3><p>The history shows what the assistant suggested and what the operations lead chose.</p></article>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script>
+    const panels=[...document.querySelectorAll('.panel')],steps=[...document.querySelectorAll('.step')],toast=document.querySelector('#toast');let generated=false,toastTimer;
+    const details={
+      validation:{tag:'High urgency',title:'Order validation flow is stalled',body:'Queue growth, repeated automation failures and delivery risk appear connected through one validation step.',signals:['12 queue items older than 45 minutes','3 automation retries failed at the same step','5 deliveries now at SLA risk','3 cases report orders not progressing'],impact:'Delivery commitments may be missed if the common dependency is not investigated.',owner:'Order Operations',check:'Confirm whether all affected orders share the failed validation component.'},
+      sla:{tag:'Medium urgency',title:'Service case cluster nearing SLA',body:'Eight cases from one customer segment show similar symptoms and are moving toward the same SLA threshold.',signals:['8 related service cases','Median age 3h 38m','Shared product family','No major incident currently open'],impact:'A cluster may be handled as isolated cases, delaying coordinated action.',owner:'Service Desk Lead',check:'Review whether the cases share a common service event before creating a coordinated incident.'},
+      robot:{tag:'Medium urgency',title:'Billing robot success rate falling',body:'The same automation has retried multiple tasks and completed fewer runs than its recent baseline.',signals:['Success rate fell from 98% to 81%','7 failed or retried runs','Same validation message in 5 runs'],impact:'Manual billing work may accumulate if failures continue.',owner:'Automation Support',check:'Inspect the repeated validation message and confirm whether input format changed.'},
+      backlog:{tag:'Low urgency',title:'Provisioning backlog above baseline',body:'The queue is growing but current items remain within SLA and no common failure signal is visible.',signals:['Backlog 18% above baseline','Oldest item at 62% of SLA','No correlated automation failures'],impact:'Continued growth may create later capacity pressure.',owner:'Delivery Management',check:'Monitor the next two intervals and confirm available team capacity.'}
+    };
+    function showToast(m){clearTimeout(toastTimer);toast.textContent=m;toast.classList.add('is-visible');toastTimer=setTimeout(()=>toast.classList.remove('is-visible'),2800)}
+    function showPanel(id){panels.forEach(p=>p.classList.toggle('is-visible',p.id===id));steps.forEach(s=>s.classList.toggle('is-active',s.dataset.panel===id))}
+    function workflow(s,d){document.querySelector('#workflow-status').textContent=s;document.querySelector('#workflow-detail').textContent=d}
+    function renderDetail(id){const d=details[id];document.querySelector('#attention-detail').innerHTML=`<span class="tag ${id==='validation'?'red':'amber'}">${d.tag}</span><h3 style="margin-top:10px">${d.title}</h3><p>${d.body}</p><div class="evidence-box"><strong>Grouped because</strong>${d.signals.map(x=>`<div class="source-row"><span>Signal</span><code>${x}</code></div>`).join('')}</div><p><strong>Operational impact:</strong> ${d.impact}</p><div class="callout amber"><strong>Recommended owner · ${d.owner}</strong>${d.check}</div><button class="primary" onclick="showPanel('response')">Choose human response</button>`}
+    steps.forEach((s,i)=>s.addEventListener('click',()=>{if(i>0&&!generated){showToast('Create the attention view before continuing.');return}showPanel(s.dataset.panel)}));
+    document.querySelector('#group').addEventListener('click',async e=>{e.currentTarget.disabled=true;showPanel('attention');document.querySelector('#attention-empty').hidden=true;document.querySelector('#attention-loading').hidden=false;workflow('Connecting signals','Looking for related operational patterns');const stages=[['Reading queues and cases…','25%'],['Connecting deliveries and automation runs…','52%'],['Evaluating urgency and impact…','78%'],['Preparing attention items…','100%']];for(const [m,p] of stages){document.querySelector('#loading-message').textContent=m;document.querySelector('#progress').style.width=p;await new Promise(r=>setTimeout(r,480))}generated=true;document.querySelector('#attention-loading').hidden=true;document.querySelector('#attention-content').hidden=false;steps[0].classList.add('is-complete');steps[1].classList.add('is-complete');renderDetail('validation');workflow('4 attention items created','Human acknowledgement and ownership required');e.currentTarget.textContent='Attention view created';showToast('Related signals were grouped; no operational action was taken.')});
+    document.querySelectorAll('.exception-row').forEach(row=>row.addEventListener('click',()=>{document.querySelectorAll('.exception-row').forEach(r=>r.classList.remove('is-selected'));row.classList.add('is-selected');renderDetail(row.dataset.id)}));
+    const radios=[...document.querySelectorAll('input[name="response"]')],owner=document.querySelector('#owner'),note=document.querySelector('#note'),record=document.querySelector('#record-response');
+    function ready(){record.disabled=!(radios.some(r=>r.checked)&&owner.value&&note.value.trim())}
+    radios.forEach(r=>r.addEventListener('change',ready));owner.addEventListener('change',ready);note.addEventListener('input',ready);
+    record.addEventListener('click',()=>{const response=radios.find(r=>r.checked).value;document.querySelector('#response-state').textContent='Human response recorded';document.querySelector('#response-state').className='badge green';document.querySelector('#audit-text').textContent=`Morgan Olsen chose “${response}”, assigned ${owner.value}, and recorded a response note. This explicit decision—not the assistant recommendation—initiates follow-up.`;document.querySelector('#human-audit').hidden=false;steps[2].classList.add('is-complete');steps[3].classList.add('is-complete');workflow('Response recorded','Accountability and source evidence retained');record.disabled=true;showToast('Human response recorded in the audit trail.')});
+    document.querySelector('#reset').addEventListener('click',()=>location.reload());
+  </script>
+</body>
+</html>

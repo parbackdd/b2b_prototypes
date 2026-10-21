@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Synthetic concept prototype for business quality and anomaly detection.">
+  <title>Quality Exception Review — Concept Prototype</title>
+  <link rel="stylesheet" href="../shared.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">B</span>
+      <span>B2B Operations</span>
+      <span class="prototype-label">Concept prototype</span>
+    </div>
+    <div class="top-actions">
+      <a class="nav-link" href="../prototypes/">All prototypes</a>
+      <span class="avatar">AR</span>
+      <span class="user-label">Alex Rivera · Delivery Quality</span>
+    </div>
+  </header>
+
+  <div class="notice"><strong>Synthetic demonstration data.</strong> This prototype does not read or update source systems. Every disposition remains a human decision.</div>
+
+  <main class="page">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Business quality & anomaly detection</p>
+        <h1>Quality Exception Review</h1>
+        <p class="intro">Focus attention on a small set of explainable data exceptions before they cause delivery delays, rework or downstream failures.</p>
+      </div>
+      <div class="status-card">
+        <span class="status-dot"></span>
+        <div><strong id="workflow-status">Batch ready</strong><span id="workflow-detail">240 synthetic records awaiting validation</span></div>
+      </div>
+    </section>
+
+    <nav class="steps" style="--step-count:4" aria-label="Quality review workflow">
+      <button class="step is-active" data-panel="batch"><span>1</span><div><strong>Incoming batch</strong><small>Understand destination rules</small></div></button>
+      <button class="step" data-panel="exceptions"><span>2</span><div><strong>Exceptions</strong><small>Review selected anomalies</small></div></button>
+      <button class="step" data-panel="disposition"><span>3</span><div><strong>Disposition</strong><small>Make a human decision</small></div></button>
+      <button class="step" data-panel="patterns"><span>4</span><div><strong>Patterns</strong><small>Identify recurring causes</small></div></button>
+    </nav>
+
+    <section class="workspace">
+      <aside class="sidebar">
+        <div class="sidebar-header"><div><p class="eyebrow">Selected import</p><h2>IMP-2025-041</h2></div><span class="badge blue">Customer data</span></div>
+        <dl class="facts">
+          <div><dt>Records</dt><dd>240</dd></div>
+          <div><dt>Destination</dt><dd>Delivery system</dd></div>
+          <div><dt>Submitted</dt><dd>Today · 10:08</dd></div>
+          <div><dt>Source</dt><dd>Order workbook</dd></div>
+          <div><dt>Owner</dt><dd>Delivery Quality</dd></div>
+        </dl>
+        <div class="summary-box">
+          <strong>Validation scope</strong>
+          <div class="summary-row"><span>Required fields</span><span class="good">Enabled</span></div>
+          <div class="summary-row"><span>Cross-field rules</span><span class="good">Enabled</span></div>
+          <div class="summary-row"><span>Destination fit</span><span class="good">Enabled</span></div>
+          <div class="summary-row"><span>Auto-correction</span><span class="warning">Disabled</span></div>
+        </div>
+        <button id="scan" class="primary full">✦ Detect exceptions</button>
+        <button id="reset" class="ghost">Reset demonstration</button>
+      </aside>
+
+      <div>
+        <section id="batch" class="panel is-visible">
+          <div class="panel-header"><div><p class="eyebrow">Incoming synthetic data</p><h2>Validate for the intended destination</h2></div><span class="badge green">Source retained unchanged</span></div>
+          <div class="metric-grid">
+            <div class="metric"><strong>240</strong><span>Incoming records</span></div>
+            <div class="metric"><strong>18</strong><span>Validation rules</span></div>
+            <div class="metric"><strong>4</strong><span>Reference datasets</span></div>
+            <div class="metric"><strong>0</strong><span>Automatic overwrites</span></div>
+          </div>
+          <div class="two-column">
+            <div>
+              <h3>Sample incoming records</h3>
+              <div style="overflow-x:auto">
+                <table class="data-table">
+                  <thead><tr><th>Order</th><th>Site</th><th>Access</th><th>Speed</th><th>Install date</th></tr></thead>
+                  <tbody>
+                    <tr><td>ORD-78031</td><td>Gotham HQ</td><td>Fibre</td><td>1000 Mbps</td><td>18 Jun</td></tr>
+                    <tr><td>ORD-78032</td><td>Harbour Store</td><td>Copper</td><td>1000 Mbps</td><td>20 Jun</td></tr>
+                    <tr><td>ORD-78033</td><td>Airport Hub</td><td>Fibre</td><td>500 Mbps</td><td>12 Jun</td></tr>
+                    <tr><td>ORD-78034</td><td>North Depot</td><td>Mobile</td><td>100 Mbps</td><td>—</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+            <div class="detail-pane">
+              <h3>Destination-specific controls</h3>
+              <ul class="list">
+                <li class="list-item"><span class="list-icon">✓</span><div><strong>Product and access compatibility</strong><p>Requested speed must be supported by the selected access type.</p></div></li>
+                <li class="list-item"><span class="list-icon">✓</span><div><strong>Installation dependency</strong><p>A committed date requires complete site and access information.</p></div></li>
+                <li class="list-item"><span class="list-icon">✓</span><div><strong>Reference consistency</strong><p>Customer identifiers and delivery locations must match approved reference data.</p></div></li>
+              </ul>
+              <div class="callout blue"><strong>Prototype boundary</strong>The assistant identifies records that deserve review. It does not silently “fix” customer or order data.</div>
+            </div>
+          </div>
+        </section>
+
+        <section id="exceptions" class="panel">
+          <div id="exception-empty" class="empty"><div class="empty-icon">◇</div><h2>No exception set yet</h2><p>Run destination-specific validation to focus on the records that need attention.</p></div>
+          <div id="exception-loading" class="loading" hidden><div class="spinner"></div><h2>Validating 240 records</h2><p id="loading-message">Applying destination rules…</p><div class="progress"><span id="progress"></span></div></div>
+          <div id="exception-content" hidden>
+            <div class="panel-header"><div><p class="eyebrow">Explainable exception set</p><h2>7 of 240 records need review</h2></div><span class="badge amber">2.9% selected</span></div>
+            <div class="metric-grid">
+              <div class="metric"><strong>233</strong><span>No issue detected</span></div>
+              <div class="metric"><strong>3</strong><span>High-impact exceptions</span></div>
+              <div class="metric"><strong>4</strong><span>Clarification needed</span></div>
+              <div class="metric"><strong>7</strong><span>Await human disposition</span></div>
+            </div>
+            <div class="exception-layout">
+              <div id="exception-list" class="exception-list">
+                <button class="exception-row is-selected" data-id="speed"><span class="severity high">High</span><div><strong>ORD-78032 · Product/access conflict</strong><small>Harbour Store · likely downstream rejection</small></div><span>›</span></button>
+                <button class="exception-row" data-id="date"><span class="severity medium">Medium</span><div><strong>ORD-78033 · Date precedes prerequisite</strong><small>Airport Hub · planning inconsistency</small></div><span>›</span></button>
+                <button class="exception-row" data-id="missing"><span class="severity medium">Medium</span><div><strong>ORD-78034 · Required date missing</strong><small>North Depot · customer clarification</small></div><span>›</span></button>
+                <button class="exception-row" data-id="customer"><span class="severity low">Low</span><div><strong>ORD-78037 · Customer name variation</strong><small>Possible known alias</small></div><span>›</span></button>
+              </div>
+              <article class="detail-pane" id="exception-detail"></article>
+            </div>
+          </div>
+        </section>
+
+        <section id="disposition" class="panel">
+          <div class="panel-header"><div><p class="eyebrow">Human-controlled resolution</p><h2>Disposition selected exception</h2></div><span id="disposition-count" class="badge amber">0 reviewed</span></div>
+          <div class="two-column">
+            <div>
+              <span class="tag red">ORD-78032 · High impact</span>
+              <h3 style="margin-top:10px">Product/access conflict</h3>
+              <p>The requested 1000 Mbps service is not supported on the selected copper access in the current delivery catalogue.</p>
+              <div class="evidence-box">
+                <strong>Source evidence</strong>
+                <div class="source-row"><span>Incoming order</span><code>access=Copper · speed=1000 Mbps</code></div>
+                <div class="source-row"><span>Destination rule</span><code>Copper maximum=100 Mbps</code></div>
+                <div class="source-row"><span>Expected impact</span><code>Order validation failure</code></div>
+              </div>
+              <div class="callout amber"><strong>Suggested path</strong>Ask whether the customer intended fibre access or a 100 Mbps service. Do not change either field without confirmation.</div>
+            </div>
+            <div class="detail-pane">
+              <h3>Choose a disposition</h3>
+              <label class="radio-card"><input type="radio" name="disposition" value="Accept suggested correction"><span><strong>Accept suggested correction</strong><p>Only after the correct value has been independently confirmed.</p></span></label>
+              <label class="radio-card"><input type="radio" name="disposition" value="Request clarification"><span><strong>Request clarification</strong><p>Send the conflict and source evidence to the order owner.</p></span></label>
+              <label class="radio-card"><input type="radio" name="disposition" value="False positive"><span><strong>Mark as false positive</strong><p>Retain the reason to improve future detection.</p></span></label>
+              <label class="form-label" for="owner">Assign owner</label>
+              <select id="owner"><option value="">Choose owner</option><option>Order Management</option><option>Customer Project</option><option>Delivery Quality</option></select>
+              <label class="form-label" for="note">Review note</label>
+              <textarea id="note" rows="4" placeholder="Explain the decision and any confirmation received…"></textarea>
+              <div class="action-row"><button id="save-disposition" class="primary" disabled>Save disposition</button></div>
+            </div>
+          </div>
+          <div id="disposition-audit" class="audit" hidden><strong>Review audit</strong><div class="audit-entry"><time>Now</time><span id="audit-text"></span></div></div>
+        </section>
+
+        <section id="patterns" class="panel">
+          <div class="panel-header"><div><p class="eyebrow">Aggregated learning signal</p><h2>Recurring quality patterns</h2></div><span class="badge blue">Last 8 synthetic batches</span></div>
+          <div class="card-grid">
+            <article class="card">
+              <div class="split-heading"><h3>Product/access conflicts</h3><strong class="large-number">19</strong></div>
+              <p>Most frequently seen when high-capacity products are paired with legacy access types.</p>
+              <div class="confidence"><div class="confidence-bar"><span style="width:76%"></span></div><strong>Rising</strong></div>
+              <div class="callout amber"><strong>Suggested improvement</strong>Add compatibility guidance earlier in the order-capture workflow.</div>
+            </article>
+            <article class="card">
+              <div class="split-heading"><h3>Incomplete delivery dates</h3><strong class="large-number">11</strong></div>
+              <p>Usually concentrated in orders imported from one workbook template.</p>
+              <div class="confidence"><div class="confidence-bar"><span style="width:51%"></span></div><strong>Stable</strong></div>
+              <div class="callout blue"><strong>Suggested improvement</strong>Make date completeness visible before submission.</div>
+            </article>
+            <article class="card">
+              <div class="split-heading"><h3>Customer reference variations</h3><strong class="large-number">7</strong></div>
+              <p>Several are accepted aliases, creating avoidable false positives.</p>
+              <div class="confidence"><div class="confidence-bar"><span style="width:32%"></span></div><strong>Falling</strong></div>
+              <div class="callout green"><strong>Learning opportunity</strong>Review approved aliases with the data owner before adjusting rules.</div>
+            </article>
+            <article class="card">
+              <span class="tag purple">Governance</span><h3>Patterns support process improvement</h3>
+              <p>Trend signals can show where forms, guidance or source controls need attention. They should not be used to assign blame or automatically change validation policy.</p>
+            </article>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script>
+    const panels=[...document.querySelectorAll('.panel')],steps=[...document.querySelectorAll('.step')],toast=document.querySelector('#toast');let generated=false,toastTimer;
+    const details={
+      speed:{tag:'High impact',title:'Product/access conflict',body:'The requested 1000 Mbps service is not supported on copper access for this destination.',source:'Copper + 1000 Mbps',rule:'Copper maximum is 100 Mbps',impact:'Likely destination rejection',suggestion:'Confirm whether access should be fibre or requested speed should be 100 Mbps.'},
+      date:{tag:'Medium impact',title:'Date precedes prerequisite',body:'The requested installation date is two days before the site-readiness milestone.',source:'Install 12 Jun',rule:'Site ready 14 Jun',impact:'Likely rescheduling and rework',suggestion:'Confirm whether site readiness can move or propose a later installation date.'},
+      missing:{tag:'Medium impact',title:'Required date missing',body:'No requested installation date is present for a record that requires scheduled field work.',source:'Install date empty',rule:'Date required for field work',impact:'Planning cannot be completed',suggestion:'Request the intended installation window from the order owner.'},
+      customer:{tag:'Low impact',title:'Customer name variation',body:'The submitted name differs from the approved customer record but resembles a known trading name.',source:'Northstar Retail AB',rule:'Northstar Foods Group',impact:'Possible reference mismatch',suggestion:'Ask the data owner whether the variation is an approved alias.'}
+    };
+    function showToast(m){clearTimeout(toastTimer);toast.textContent=m;toast.classList.add('is-visible');toastTimer=setTimeout(()=>toast.classList.remove('is-visible'),2800)}
+    function showPanel(id){panels.forEach(p=>p.classList.toggle('is-visible',p.id===id));steps.forEach(s=>s.classList.toggle('is-active',s.dataset.panel===id))}
+    function workflow(status,detail){document.querySelector('#workflow-status').textContent=status;document.querySelector('#workflow-detail').textContent=detail}
+    function renderDetail(id){const d=details[id];document.querySelector('#exception-detail').innerHTML=`<span class="tag ${id==='speed'?'red':'amber'}">${d.tag}</span><h3 style="margin-top:10px">${d.title}</h3><p>${d.body}</p><div class="evidence-box"><strong>Why it was selected</strong><div class="source-row"><span>Source</span><code>${d.source}</code></div><div class="source-row"><span>Rule</span><code>${d.rule}</code></div><div class="source-row"><span>Impact</span><code>${d.impact}</code></div></div><div class="callout amber"><strong>Suggested next step</strong>${d.suggestion}</div><button class="primary" onclick="showPanel('disposition')">Review disposition</button>`}
+    steps.forEach((s,i)=>s.addEventListener('click',()=>{if(i>0&&!generated){showToast('Detect exceptions before continuing.');return}showPanel(s.dataset.panel)}));
+    document.querySelector('#scan').addEventListener('click',async e=>{e.currentTarget.disabled=true;showPanel('exceptions');document.querySelector('#exception-empty').hidden=true;document.querySelector('#exception-loading').hidden=false;workflow('Validating batch','Applying destination-specific rules');const stages=[['Checking required fields…','24%'],['Testing cross-field consistency…','51%'],['Comparing destination constraints…','76%'],['Prioritising explainable exceptions…','100%']];for(const [m,p] of stages){document.querySelector('#loading-message').textContent=m;document.querySelector('#progress').style.width=p;await new Promise(r=>setTimeout(r,480))}generated=true;document.querySelector('#exception-loading').hidden=true;document.querySelector('#exception-content').hidden=false;steps[0].classList.add('is-complete');steps[1].classList.add('is-complete');renderDetail('speed');workflow('7 exceptions identified','233 records require no action');e.currentTarget.textContent='Exceptions detected';showToast('A focused exception set was created without changing source data.')});
+    document.querySelectorAll('.exception-row').forEach(row=>row.addEventListener('click',()=>{document.querySelectorAll('.exception-row').forEach(r=>r.classList.remove('is-selected'));row.classList.add('is-selected');renderDetail(row.dataset.id)}));
+    const radios=[...document.querySelectorAll('input[name="disposition"]')],owner=document.querySelector('#owner'),note=document.querySelector('#note'),save=document.querySelector('#save-disposition');
+    function ready(){save.disabled=!(radios.some(r=>r.checked)&&owner.value&&note.value.trim())}
+    radios.forEach(r=>r.addEventListener('change',ready));owner.addEventListener('change',ready);note.addEventListener('input',ready);
+    save.addEventListener('click',()=>{const choice=radios.find(r=>r.checked).value;document.querySelector('#audit-text').textContent=`${choice}; assigned to ${owner.value}. Source record remains unchanged until the approved process is completed.`;document.querySelector('#disposition-audit').hidden=false;document.querySelector('#disposition-count').textContent='1 reviewed';document.querySelector('#disposition-count').className='badge green';steps[2].classList.add('is-complete');workflow('Disposition recorded','Human ownership and audit trail retained');save.disabled=true;showToast('Disposition saved. No source data was overwritten.')});
+    document.querySelector('#reset').addEventListener('click',()=>location.reload());
+  </script>
+</body>
+</html>

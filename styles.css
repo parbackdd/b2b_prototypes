@@ -64,6 +64,22 @@ button {
   font-weight: 700;
 }
 
+.portfolio-link {
+  padding: 6px 10px;
+  color: #f2d8ff;
+  border: 1px solid rgba(255, 255, 255, .27);
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.portfolio-link:hover {
+  background: rgba(255, 255, 255, .1);
+}
+
 .brand-mark {
   width: 34px;
   height: 34px;
@@ -873,7 +889,8 @@ h3 {
 }
 
 @media (max-width: 900px) {
-  .user {
+  .user .avatar,
+  .user-name {
     display: none;
   }
 

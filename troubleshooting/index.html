@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Synthetic concept prototype for AI-assisted troubleshooting.">
+  <title>Guided Technical Diagnosis — Concept Prototype</title>
+  <link rel="stylesheet" href="../shared.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true">B</span>
+      <span>B2B Operations</span>
+      <span class="prototype-label">Concept prototype</span>
+    </div>
+    <div class="top-actions">
+      <a class="nav-link" href="../prototypes/">All prototypes</a>
+      <span class="avatar">SK</span>
+      <span class="user-label">Sam Kim · Technical Specialist</span>
+    </div>
+  </header>
+
+  <div class="notice"><strong>Synthetic demonstration data.</strong> This prototype is not connected to production systems and cannot execute technical changes.</div>
+
+  <main class="page">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">AI-assisted troubleshooting</p>
+        <h1>Guided Technical Diagnosis</h1>
+        <p class="intro">Combine current case evidence, logs and previous faults into transparent hypotheses and specialist-controlled diagnostic actions.</p>
+      </div>
+      <div class="status-card">
+        <span class="status-dot"></span>
+        <div><strong id="workflow-status">Ready to analyse</strong><span id="workflow-detail">No diagnostic analysis created</span></div>
+      </div>
+    </section>
+
+    <nav class="steps" style="--step-count:4" aria-label="Troubleshooting workflow">
+      <button class="step is-active" data-panel="evidence"><span>1</span><div><strong>Evidence</strong><small>Case, alarm and logs</small></div></button>
+      <button class="step" data-panel="hypotheses"><span>2</span><div><strong>Hypotheses</strong><small>Explain likely causes</small></div></button>
+      <button class="step" data-panel="checks"><span>3</span><div><strong>Diagnostic checks</strong><small>Specialist runs tests</small></div></button>
+      <button class="step" data-panel="decision"><span>4</span><div><strong>Decision</strong><small>Record human judgement</small></div></button>
+    </nav>
+
+    <section class="workspace">
+      <aside class="sidebar">
+        <div class="sidebar-header">
+          <div><p class="eyebrow">Selected case</p><h2>CASE-48271</h2></div>
+          <span class="priority">P2</span>
+        </div>
+        <dl class="facts">
+          <div><dt>Customer</dt><dd>Northstar Foods</dd></div>
+          <div><dt>Service</dt><dd>Hosted Voice</dd></div>
+          <div><dt>Symptom</dt><dd>Intermittent calls</dd></div>
+          <div><dt>Started</dt><dd>Today · 09:12</dd></div>
+          <div><dt>Change</dt><dd>Config · 07:30</dd></div>
+          <div><dt>Owner</dt><dd>Voice Support</dd></div>
+        </dl>
+        <div class="summary-box">
+          <strong>Evidence readiness</strong>
+          <div class="summary-row"><span>Case context</span><span class="good">Available</span></div>
+          <div class="summary-row"><span>Signalling logs</span><span class="good">Selected</span></div>
+          <div class="summary-row"><span>Previous cases</span><span class="good">Searchable</span></div>
+          <div class="summary-row"><span>End-user test</span><span class="warning">Missing</span></div>
+        </div>
+        <button id="analyse" class="primary full">✦ Analyse evidence</button>
+        <button id="reset" class="ghost">Reset demonstration</button>
+      </aside>
+
+      <div>
+        <section id="evidence" class="panel is-visible">
+          <div class="panel-header">
+            <div><p class="eyebrow">Current technical evidence</p><h2>What the specialist knows</h2></div>
+            <span class="badge green">3 sources selected</span>
+          </div>
+          <div class="two-column">
+            <div>
+              <h3>Case and alarm timeline</h3>
+              <ul class="list">
+                <li class="list-item" id="ev-change"><time>07:30</time><div><strong>Planned routing configuration deployed</strong><p>Updated outbound routing policy on the regional session controller.</p></div><span class="tag blue">Change</span></li>
+                <li class="list-item" id="ev-alarm"><time>09:12</time><div><strong>Session retry rate increased</strong><p>Monitoring detected a rise from 1.8% to 12.4% for one route group.</p></div><span class="tag red">Alarm</span></li>
+                <li class="list-item" id="ev-case"><time>09:18</time><div><strong>Customer case opened</strong><p>Users report intermittent failed outbound calls; inbound calls remain stable.</p></div><span class="tag purple">Case</span></li>
+                <li class="list-item" id="ev-scope"><time>09:31</time><div><strong>Impact isolated</strong><p>Failures appear limited to calls using one carrier route and two sites.</p></div><span class="tag amber">Scope</span></li>
+              </ul>
+            </div>
+            <div class="detail-pane">
+              <div class="split-heading"><h3>Selected signalling excerpt</h3><span class="badge blue">LOG-17</span></div>
+              <div class="code-block" aria-label="Synthetic signalling log">
+                <div>09:10:42 INVITE route=RG-04 destination=external</div>
+                <div>09:10:42 100 Trying</div>
+                <div class="code-line alert">09:10:43 503 Service Unavailable retry-after=2</div>
+                <div>09:10:45 INVITE retry route=RG-07</div>
+                <div class="code-line good">09:10:46 200 OK</div>
+                <div class="code-line alert">09:11:03 policy mismatch: preferred route unavailable</div>
+              </div>
+              <div class="callout amber"><strong>Known evidence gap</strong>No controlled end-user test has been run after the configuration change. The analysis must not present a confirmed root cause.</div>
+            </div>
+          </div>
+        </section>
+
+        <section id="hypotheses" class="panel">
+          <div id="hypothesis-empty" class="empty">
+            <div class="empty-icon">⌁</div><h2>No hypotheses yet</h2><p>Analyse the selected case evidence before reviewing possible causes.</p>
+          </div>
+          <div id="hypothesis-loading" class="loading" hidden>
+            <div class="spinner"></div><h2>Comparing evidence</h2><p id="loading-message">Reading the current case and selected logs…</p><div class="progress"><span id="progress"></span></div>
+          </div>
+          <div id="hypothesis-content" hidden>
+            <div class="panel-header"><div><p class="eyebrow">AI-generated diagnostic support</p><h2>Possible causes — not a confirmed diagnosis</h2></div><span class="badge amber">Specialist review required</span></div>
+            <div class="metric-grid">
+              <div class="metric"><strong>3</strong><span>Hypotheses generated</span></div>
+              <div class="metric"><strong>6</strong><span>Evidence links</span></div>
+              <div class="metric"><strong>2</strong><span>Similar cases found</span></div>
+              <div class="metric"><strong>1</strong><span>Critical evidence gap</span></div>
+            </div>
+            <div class="card-grid">
+              <article class="card is-selected">
+                <div class="split-heading"><div><span class="tag purple">Hypothesis 1</span><h3>Routing policy mismatch after configuration change</h3></div><span class="tag amber">68% support</span></div>
+                <p>The timing, affected route group and retry behaviour are consistent with a route preference that cannot reach the intended carrier.</p>
+                <div class="confidence"><div class="confidence-bar"><span style="width:68%"></span></div><strong>Medium</strong></div>
+                <div class="evidence-links"><button class="evidence-link" data-evidence="ev-change">Change</button><button class="evidence-link" data-evidence="ev-alarm">Alarm</button><button class="evidence-link" data-evidence="ev-scope">Scope</button></div>
+              </article>
+              <article class="card">
+                <div class="split-heading"><div><span class="tag blue">Hypothesis 2</span><h3>Temporary carrier capacity issue</h3></div><span class="tag amber">44% support</span></div>
+                <p>The 503 response may reflect carrier-side capacity, but the close timing to the change and route-specific impact weaken this explanation.</p>
+                <div class="confidence"><div class="confidence-bar"><span style="width:44%"></span></div><strong>Low–medium</strong></div>
+                <div class="evidence-links"><button class="evidence-link" data-evidence="ev-alarm">503 response</button><button class="evidence-link" data-evidence="ev-case">Case</button></div>
+              </article>
+              <article class="card">
+                <div class="split-heading"><div><span class="tag blue">Hypothesis 3</span><h3>Site-specific network instability</h3></div><span class="tag blue">26% support</span></div>
+                <p>Two sites are affected, but stable inbound calls and successful retries make a general site-network failure less likely.</p>
+                <div class="confidence"><div class="confidence-bar"><span style="width:26%"></span></div><strong>Low</strong></div>
+                <div class="evidence-links"><button class="evidence-link" data-evidence="ev-case">Symptoms</button><button class="evidence-link" data-evidence="ev-scope">Affected sites</button></div>
+              </article>
+              <article class="card">
+                <span class="tag green">Previous experience</span>
+                <h3>Two similar historical cases</h3>
+                <p><strong>CASE-39110:</strong> Similar retry pattern after routing-policy deployment. Resolved by correcting route priority.</p>
+                <p><strong>CASE-27405:</strong> Carrier capacity issue produced the same response code, but affected all routes rather than one route group.</p>
+                <div class="callout blue"><strong>Important difference</strong>The historical cases are relevant evidence, not proof that the current cause is identical.</div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section id="checks" class="panel">
+          <div class="panel-header"><div><p class="eyebrow">Specialist-controlled validation</p><h2>Recommended diagnostic checks</h2></div><span id="check-status" class="badge amber">0 of 3 recorded</span></div>
+          <div class="callout"><strong>No autonomous action</strong>The assistant proposes checks. A specialist chooses whether to run them and records the observed result.</div>
+          <div id="check-list">
+            <article class="card check-item" data-check="1">
+              <div class="split-heading"><div><span class="tag purple">Recommended first</span><h3>Compare current route priority with the pre-change configuration</h3></div><button class="mini run-check">Record result</button></div>
+              <p>Expected diagnostic value: confirms whether the preferred route points to an unavailable carrier path.</p>
+              <select class="check-result" hidden><option value="">Choose observed result</option><option>Mismatch confirmed</option><option>No mismatch found</option><option>Check could not be completed</option></select>
+            </article>
+            <article class="card check-item" data-check="2">
+              <div class="split-heading"><div><span class="tag blue">Safe test</span><h3>Place a controlled test call through each route group</h3></div><button class="mini run-check">Record result</button></div>
+              <p>Expected diagnostic value: determines whether failure follows the route or the end-user site.</p>
+              <select class="check-result" hidden><option value="">Choose observed result</option><option>Failure follows route RG-04</option><option>Failure follows the site</option><option>No failure reproduced</option></select>
+            </article>
+            <article class="card check-item" data-check="3">
+              <div class="split-heading"><div><span class="tag blue">External check</span><h3>Verify carrier status for the affected interconnect</h3></div><button class="mini run-check">Record result</button></div>
+              <p>Expected diagnostic value: tests the carrier-capacity hypothesis without changing production configuration.</p>
+              <select class="check-result" hidden><option value="">Choose observed result</option><option>No carrier incident reported</option><option>Carrier incident confirmed</option><option>Awaiting carrier response</option></select>
+            </article>
+          </div>
+        </section>
+
+        <section id="decision" class="panel">
+          <div class="panel-header"><div><p class="eyebrow">Human judgement</p><h2>Record specialist decision</h2></div><span id="decision-state" class="badge amber">Decision pending</span></div>
+          <div class="two-column">
+            <div>
+              <h3>Assessment</h3>
+              <label class="radio-card"><input type="radio" name="hypothesis" value="Routing policy mismatch"><span><strong>Routing policy mismatch</strong><p>Most supported by current evidence; still requires diagnostic confirmation.</p></span></label>
+              <label class="radio-card"><input type="radio" name="hypothesis" value="Carrier capacity issue"><span><strong>Carrier capacity issue</strong><p>Possible alternative if route configuration is correct.</p></span></label>
+              <label class="radio-card"><input type="radio" name="hypothesis" value="Insufficient evidence"><span><strong>Insufficient evidence</strong><p>Continue investigation without selecting a likely cause.</p></span></label>
+            </div>
+            <div class="detail-pane">
+              <h3>Next action</h3>
+              <label class="form-label" for="next-action">Specialist-selected action</label>
+              <select id="next-action"><option value="">Choose next action</option><option>Prepare controlled rollback for change approval</option><option>Continue diagnostic testing</option><option>Request carrier investigation</option><option>Escalate to product specialist</option></select>
+              <label class="form-label" for="decision-note">Decision note</label>
+              <textarea id="decision-note" rows="5" placeholder="Document evidence, uncertainty and why this action was selected…"></textarea>
+              <div class="action-row"><button id="record-decision" class="primary" disabled>Record specialist decision</button></div>
+              <p style="color:var(--muted);font-size:11px;margin-top:10px">Recording a decision does not execute a production change.</p>
+            </div>
+          </div>
+          <div id="decision-audit" class="audit" hidden><strong>Decision audit</strong><div class="audit-entry"><time>Now</time><span id="audit-text"></span></div></div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const panels=[...document.querySelectorAll('.panel')],steps=[...document.querySelectorAll('.step')];
+    const analyse=document.querySelector('#analyse'),toast=document.querySelector('#toast');
+    let generated=false, toastTimer;
+    function showToast(message){clearTimeout(toastTimer);toast.textContent=message;toast.classList.add('is-visible');toastTimer=setTimeout(()=>toast.classList.remove('is-visible'),3000)}
+    function showPanel(id){panels.forEach(p=>p.classList.toggle('is-visible',p.id===id));steps.forEach(s=>s.classList.toggle('is-active',s.dataset.panel===id))}
+    function workflow(status,detail,color='green'){document.querySelector('#workflow-status').textContent=status;document.querySelector('#workflow-detail').textContent=detail;const dot=document.querySelector('.status-dot');const map={green:['var(--green)','var(--green-soft)'],purple:['var(--purple-500)','var(--purple-100)'],amber:['var(--amber)','var(--amber-soft)']};dot.style.background=map[color][0];dot.style.boxShadow=`0 0 0 5px ${map[color][1]}`}
+    steps.forEach((step,index)=>step.addEventListener('click',()=>{if(index>0&&!generated){showToast('Analyse the evidence to continue.');return}showPanel(step.dataset.panel)}));
+    analyse.addEventListener('click',async()=>{analyse.disabled=true;showPanel('hypotheses');document.querySelector('#hypothesis-empty').hidden=true;document.querySelector('#hypothesis-loading').hidden=false;workflow('Analysing evidence','Comparing current signals and previous cases','purple');steps[0].classList.add('is-complete');const stages=[['Reading current case and selected logs…','28%'],['Comparing previous faults and cases…','56%'],['Testing competing explanations…','78%'],['Preparing transparent hypotheses…','100%']];for(const [m,p] of stages){document.querySelector('#loading-message').textContent=m;document.querySelector('#progress').style.width=p;await new Promise(r=>setTimeout(r,520))}generated=true;document.querySelector('#hypothesis-loading').hidden=true;document.querySelector('#hypothesis-content').hidden=false;steps[1].classList.add('is-complete');workflow('Hypotheses ready','Specialist validation is required','amber');analyse.textContent='Analysis created';showToast('Three hypotheses created. None is presented as a confirmed diagnosis.')});
+    document.querySelectorAll('.evidence-link').forEach(b=>b.addEventListener('click',()=>{showPanel('evidence');const el=document.querySelector('#'+b.dataset.evidence);el.style.background='var(--purple-100)';el.scrollIntoView({behavior:'smooth',block:'center'});setTimeout(()=>el.style.background='',1800)}));
+    const results=[...document.querySelectorAll('.check-result')];
+    document.querySelectorAll('.run-check').forEach(button=>button.addEventListener('click',()=>{const select=button.closest('.check-item').querySelector('.check-result');select.hidden=false;select.focus()}));
+    results.forEach(select=>select.addEventListener('change',()=>{const count=results.filter(x=>x.value).length;document.querySelector('#check-status').textContent=`${count} of 3 recorded`;if(count===3){steps[2].classList.add('is-complete');workflow('Diagnostic checks recorded','Specialist decision can now be documented','amber')}showToast('Observed result recorded by the specialist.')}));
+    const radios=[...document.querySelectorAll('input[name="hypothesis"]')],action=document.querySelector('#next-action'),note=document.querySelector('#decision-note'),record=document.querySelector('#record-decision');
+    function decisionReady(){record.disabled=!(radios.some(r=>r.checked)&&action.value&&note.value.trim())}
+    radios.forEach(r=>r.addEventListener('change',decisionReady));action.addEventListener('change',decisionReady);note.addEventListener('input',decisionReady);
+    record.addEventListener('click',()=>{const selected=radios.find(r=>r.checked).value;document.querySelector('#decision-state').textContent='Specialist decision recorded';document.querySelector('#decision-state').className='badge green';document.querySelector('#audit-text').textContent=`${selected} selected; next action: ${action.value}. No production change was executed.`;document.querySelector('#decision-audit').hidden=false;steps[3].classList.add('is-complete');workflow('Decision recorded','Human judgement retained; no autonomous change','green');record.disabled=true;showToast('Specialist decision recorded with an audit trail.')});
+    document.querySelector('#reset').addEventListener('click',()=>location.reload());
+  </script>
+</body>
+</html>
